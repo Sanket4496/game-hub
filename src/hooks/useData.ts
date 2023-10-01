@@ -13,7 +13,7 @@ const useData = <T>(
   deps?: any[]
 ) => {
   const [data, setData] = useState<T[]>([]);
-  const [errors, setErrors] = useState("");
+  const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
   useEffect(
@@ -31,7 +31,7 @@ const useData = <T>(
         })
         .catch((err) => {
           if (err instanceof CanceledError) return;
-          setErrors(err.message);
+          setError(err.message);
           setLoading(false);
         });
 
@@ -40,7 +40,7 @@ const useData = <T>(
     deps ? [...deps] : []
   );
 
-  return { data, errors, isLoading };
+  return { data, error, isLoading };
 };
 
 export default useData;
